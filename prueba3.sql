@@ -222,13 +222,11 @@ INSERT INTO Compuesta_Por(ID_Prod,Numero_Factura,Cantidad_Producto) VALUES
 
 -- Consulta 1
 
-SELECT Cliente.Nombre_Cliente AS Mayor_Compra
-From Factura
-INNER JOIN 
-(SELECT Numero_Factura,SUM(Cantidad_Producto* Valor_Unitario) AS Subtotal
+SELECT Numero_Factura,SUM(Cantidad_Producto* Valor_Unitario) AS Subtotal
 FROM Producto,Compuesta_Por
 WHERE ID_Producto = ID_Prod
 GROUP BY Compuesta_Por.Numero_Factura
-ORDER BY Subtotal DESC) AS T1 
+ORDER BY Subtotal DESC
+LIMIT 1;
 
 
