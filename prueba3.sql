@@ -1,6 +1,7 @@
 --crear base de datos
 CREATE DATABASE prueba;
 
+\c prueba
 --Creando Tablas
 
 CREATE TABLE Cliente(
@@ -19,6 +20,13 @@ CREATE TABLE Factura(
     FOREIGN KEY (ID_Cliente) REFERENCES Cliente(ID_Cliente)
 );
 
+CREATE TABLE Categoria(
+    ID_Categoria SERIAL,
+    Descripcion_Categoria VARCHAR(300),
+    Nombre_Categoria VARCHAR (300),
+    PRIMARY KEY (ID_Categoria)
+);
+
 CREATE TABLE Producto(
     ID_Producto SERIAL,
     Descripcion_Producto VARCHAR(270),
@@ -29,19 +37,12 @@ CREATE TABLE Producto(
     FOREIGN KEY (Categoria_Producto) REFERENCES Categoria(ID_Categoria)
 );
 
-CREATE TABLE Categoria(
-    ID_Categoria SERIAL,
-    Descripcion_Categoria VARCHAR(300),
-    Nombre_Categoria VARCHAR (300),
-    PRIMARY KEY (ID_Categoria)
-);
-
 CREATE TABLE Compuesta_Por(
     Numero_Factura INT,
-    ID_Producto INT,
+    ID_Prod INT,
     Cantidad_Producto INT,
-    PRIMARY KEY (ID_Producto,Numero_Factura),
-    FOREIGN KEY (ID_Producto) REFERENCES Producto(ID_Producto),
+    PRIMARY KEY (ID_Prod,Numero_Factura),
+    FOREIGN KEY (ID_Prod) REFERENCES Producto(ID_Producto),
     FOREIGN KEY (Numero_Factura) REFERENCES Factura(Numero_Factura) 
 );
 
@@ -105,118 +106,118 @@ VALUES ('Traga Traga','Snack Dulce y suave de gusto popular','99',3);
 
 --Facturas Cliente 1 Folio 1 y 2
 
-INSERT INTO Facturas(Fecha_factura,ID_Cliente) VALUES 
+INSERT INTO Factura(Fecha_factura,ID_Cliente) VALUES 
 ('10-06-2020',1);
 
-INSERT INTO Facturas(Fecha_factura,ID_Cliente) VALUES 
+INSERT INTO Factura(Fecha_factura,ID_Cliente) VALUES 
 ('11-06-2020',1);
 
 --Facturas Cliente 2 Folios 3,4,5
 
-INSERT INTO Facturas(Fecha_factura,ID_Cliente) VALUES 
+INSERT INTO Factura(Fecha_factura,ID_Cliente) VALUES 
 ('10-06-2020',2);
-INSERT INTO Facturas(Fecha_factura,ID_Cliente) VALUES 
+INSERT INTO Factura(Fecha_factura,ID_Cliente) VALUES 
 ('11-06-2020',2);
-INSERT INTO Facturas(Fecha_factura,ID_Cliente) VALUES 
+INSERT INTO Factura(Fecha_factura,ID_Cliente) VALUES 
 ('12-06-2020',2);
 
 --Factura Cliente 3 Folio 6
 
-INSERT INTO Facturas(Fecha_factura,ID_Cliente) VALUES 
+INSERT INTO Factura(Fecha_factura,ID_Cliente) VALUES 
 ('10-06-2020',3);
 
 --Facturas Cliente 4 Folio 7,8,9,10
 
-INSERT INTO Facturas(Fecha_factura,ID_Cliente) VALUES 
+INSERT INTO Factura(Fecha_factura,ID_Cliente) VALUES 
 ('10-06-2020',4);
 
-INSERT INTO Facturas(Fecha_factura,ID_Cliente) VALUES 
+INSERT INTO Factura(Fecha_factura,ID_Cliente) VALUES 
 ('10-06-2020',4);
 
-INSERT INTO Facturas(Fecha_factura,ID_Cliente) VALUES 
+INSERT INTO Factura(Fecha_factura,ID_Cliente) VALUES 
 ('10-06-2020',4);
 
-INSERT INTO Facturas(Fecha_factura,ID_Cliente) VALUES 
+INSERT INTO Factura(Fecha_factura,ID_Cliente) VALUES 
 ('10-06-2020',4);
 
 --Linkeando Facturas y Productos
 
 --Factura 1
-INSERT INTO Compuesta_Por(ID_Producto,Numero_Factura,Cantidad_Producto) VALUES
+INSERT INTO Compuesta_Por(ID_Prod,Numero_Factura,Cantidad_Producto) VALUES
 (1,1,3);
 
-INSERT INTO Compuesta_Por(ID_Producto,Numero_Factura,Cantidad_Producto) VALUES
+INSERT INTO Compuesta_Por(ID_Prod,Numero_Factura,Cantidad_Producto) VALUES
 (2,1,2);
 
 --Factura 2
 
-INSERT INTO Compuesta_Por(ID_Producto,Numero_Factura,Cantidad_Producto) VALUES
+INSERT INTO Compuesta_Por(ID_Prod,Numero_Factura,Cantidad_Producto) VALUES
 (6,2,3);
-INSERT INTO Compuesta_Por(ID_Producto,Numero_Factura,Cantidad_Producto) VALUES
+INSERT INTO Compuesta_Por(ID_Prod,Numero_Factura,Cantidad_Producto) VALUES
 (8,2,5);
-INSERT INTO Compuesta_Por(ID_Producto,Numero_Factura,Cantidad_Producto) VALUES
+INSERT INTO Compuesta_Por(ID_Prod,Numero_Factura,Cantidad_Producto) VALUES
 (7,2,4);
 
 --Factura 3
 
-INSERT INTO Compuesta_Por(ID_Producto,Numero_Factura,Cantidad_Producto) VALUES
+INSERT INTO Compuesta_Por(ID_Prod,Numero_Factura,Cantidad_Producto) VALUES
 (1,3,3);
-INSERT INTO Compuesta_Por(ID_Producto,Numero_Factura,Cantidad_Producto) VALUES
+INSERT INTO Compuesta_Por(ID_Prod,Numero_Factura,Cantidad_Producto) VALUES
 (5,3,3);
-INSERT INTO Compuesta_Por(ID_Producto,Numero_Factura,Cantidad_Producto) VALUES
+INSERT INTO Compuesta_Por(ID_Prod,Numero_Factura,Cantidad_Producto) VALUES
 (4,3,3);
 
 --Factura 4
 
-INSERT INTO Compuesta_Por(ID_Producto,Numero_Factura,Cantidad_Producto) VALUES
+INSERT INTO Compuesta_Por(ID_Prod,Numero_Factura,Cantidad_Producto) VALUES
 (1,4,3);
-INSERT INTO Compuesta_Por(ID_Producto,Numero_Factura,Cantidad_Producto) VALUES
+INSERT INTO Compuesta_Por(ID_Prod,Numero_Factura,Cantidad_Producto) VALUES
 (8,4,3);
 
 --Factura 5
 
-INSERT INTO Compuesta_Por(ID_Producto,Numero_Factura,Cantidad_Producto) VALUES
+INSERT INTO Compuesta_Por(ID_Prod,Numero_Factura,Cantidad_Producto) VALUES
 (4,5,3);
-INSERT INTO Compuesta_Por(ID_Producto,Numero_Factura,Cantidad_Producto) VALUES
+INSERT INTO Compuesta_Por(ID_Prod,Numero_Factura,Cantidad_Producto) VALUES
 (1,5,3);
-INSERT INTO Compuesta_Por(ID_Producto,Numero_Factura,Cantidad_Producto) VALUES
+INSERT INTO Compuesta_Por(ID_Prod,Numero_Factura,Cantidad_Producto) VALUES
 (2,5,3);
 
 --Factura 6
 
-INSERT INTO Compuesta_Por(ID_Producto,Numero_Factura,Cantidad_Producto) VALUES
+INSERT INTO Compuesta_Por(ID_Prod,Numero_Factura,Cantidad_Producto) VALUES
 (1,6,3);
 
 --Factura 7
 
-INSERT INTO Compuesta_Por(ID_Producto,Numero_Factura,Cantidad_Producto) VALUES
+INSERT INTO Compuesta_Por(ID_Prod,Numero_Factura,Cantidad_Producto) VALUES
 (6,7,3);
-INSERT INTO Compuesta_Por(ID_Producto,Numero_Factura,Cantidad_Producto) VALUES
+INSERT INTO Compuesta_Por(ID_Prod,Numero_Factura,Cantidad_Producto) VALUES
 (3,7,3);
 
 --Factura 8
 
-INSERT INTO Compuesta_Por(ID_Producto,Numero_Factura,Cantidad_Producto) VALUES
+INSERT INTO Compuesta_Por(ID_Prod,Numero_Factura,Cantidad_Producto) VALUES
 (1,8,3);
-INSERT INTO Compuesta_Por(ID_Producto,Numero_Factura,Cantidad_Producto) VALUES
+INSERT INTO Compuesta_Por(ID_Prod,Numero_Factura,Cantidad_Producto) VALUES
 (5,8,3);
-INSERT INTO Compuesta_Por(ID_Producto,Numero_Factura,Cantidad_Producto) VALUES
+INSERT INTO Compuesta_Por(ID_Prod,Numero_Factura,Cantidad_Producto) VALUES
 (7,8,3);
 
 --Factura 9
 
-INSERT INTO Compuesta_Por(ID_Producto,Numero_Factura,Cantidad_Producto) VALUES
+INSERT INTO Compuesta_Por(ID_Prod,Numero_Factura,Cantidad_Producto) VALUES
 (1,9,3);
-INSERT INTO Compuesta_Por(ID_Producto,Numero_Factura,Cantidad_Producto) VALUES
+INSERT INTO Compuesta_Por(ID_Prod,Numero_Factura,Cantidad_Producto) VALUES
 (8,9,3);
-INSERT INTO Compuesta_Por(ID_Producto,Numero_Factura,Cantidad_Producto) VALUES
+INSERT INTO Compuesta_Por(ID_Prod,Numero_Factura,Cantidad_Producto) VALUES
 (4,9,3);
-INSERT INTO Compuesta_Por(ID_Producto,Numero_Factura,Cantidad_Producto) VALUES
+INSERT INTO Compuesta_Por(ID_Prod,Numero_Factura,Cantidad_Producto) VALUES
 (3,9,24);
 
 --Factura 10
 
-INSERT INTO Compuesta_Por(ID_Producto,Numero_Factura,Cantidad_Producto) VALUES
+INSERT INTO Compuesta_Por(ID_Prod,Numero_Factura,Cantidad_Producto) VALUES
 (3,10,150);
 
 -- Consulta 1
@@ -224,6 +225,8 @@ INSERT INTO Compuesta_Por(ID_Producto,Numero_Factura,Cantidad_Producto) VALUES
 SELECT Cliente.Nombre_Cliente AS Mayor_Compra
 From Factura
 
-SELECT SUM(Cantidad_Producto* Valor_Unitario) AS Subtotal
+SELECT Numero_Factura,SUM(Cantidad_Producto* Valor_Unitario) AS Subtotal
 FROM Producto,Compuesta_Por
-WHERE ID_Producto = ID_Producto
+WHERE ID_Producto = ID_Prod
+GROUP BY Compuesta_Por.Numero_Factura;
+
