@@ -6,7 +6,7 @@ CREATE DATABASE prueba;
 
 CREATE TABLE Cliente(
     ID_Cl SERIAL,
-    RUT VARCHAR(10),
+    RUT VARCHAR(12),
     Direccion VARCHAR(300),
     Nombre_Cliente VARCHAR(300),
     PRIMARY KEY (ID_Cl)
