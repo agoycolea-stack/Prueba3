@@ -5,41 +5,41 @@ CREATE DATABASE prueba;
 --Creando Tablas
 
 CREATE TABLE Cliente(
-    ID_Cl SERIAL,
-    RUT VARCHAR(12),
+    ID_Cl SERIAL NOT NULL,
+    RUT VARCHAR(12) NOT NULL,
     Direccion VARCHAR(300),
     Nombre_Cliente VARCHAR(300),
     PRIMARY KEY (ID_Cl)
 );
 
 CREATE TABLE Factura(
-    Numero_Factura SERIAL,
+    Numero_Factura SERIAL NOT NULL,
     Fecha_factura DATE,
-    ID_Cliente INT,
+    ID_Cliente INT NOT NULL,
     PRIMARY KEY (Numero_Factura),
     FOREIGN KEY (ID_Cliente) REFERENCES Cliente(ID_Cl)
 );
 
 CREATE TABLE Categoria(
-    ID_Cat SERIAL,
+    ID_Cat SERIAL NOT NULL,
     Descripcion_Categoria VARCHAR(300),
-    Nombre_Categoria VARCHAR (300),
+    Nombre_Categoria VARCHAR (300) NOT NULL,
     PRIMARY KEY (ID_Cat)
 );
 
 CREATE TABLE Producto(
-    ID_Producto SERIAL,
+    ID_Producto SERIAL NOT NULL,
     Descripcion_Producto VARCHAR(270),
-    Nombre_Producto VARCHAR(270),
-    Valor_Unitario FLOAT,
-    Categoria_Producto INT,
+    Nombre_Producto VARCHAR(270) NOT NULL,
+    Valor_Unitario FLOAT NOT NULL,
+    Categoria_Producto INT NOT NULL,
     PRIMARY KEY (ID_Producto),
     FOREIGN KEY (Categoria_Producto) REFERENCES Categoria(ID_Cat)
 );
 
 CREATE TABLE Compuesta_Por(
-    Num_Factura INT,
-    ID_Prod INT,
+    Num_Factura INT NOT NULL,
+    ID_Prod INT NOT NULL,
     Cantidad_Producto INT,
     PRIMARY KEY (ID_Prod,Num_Factura),
     FOREIGN KEY (ID_Prod) REFERENCES Producto(ID_Producto),
